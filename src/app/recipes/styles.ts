@@ -5,28 +5,26 @@ import { theme } from '@/theme';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
+  },
+  header: {
+    paddingHorizontal: 32,
+    paddingTop: 62,
+    marginBottom: 12,
   },
   title: {
-    fontSize: theme.fonts.size.heading.xl,
+    fontSize: theme.fonts.size.heading.md,
     fontFamily: theme.fonts.family.bold,
-    lineHeight: 44,
-    marginTop: 42,
+    marginTop: 16,
   },
-  subtitle: {
-    fontFamily: theme.fonts.family.regular,
+  recipes: {
+    padding: 32,
   },
-  message: {
+  recipesContent: {
+    gap: 16,
+  },
+  empty: {
     fontSize: theme.fonts.size.body.md,
     fontFamily: theme.fonts.family.regular,
     color: theme.colors.gray_400,
-    marginTop: 12,
-    marginBottom: 38,
   },
-  ingredient: {
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-    paddingBottom: 200,
-    gap: 12,
-  },
-})
+});
