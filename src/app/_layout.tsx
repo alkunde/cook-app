@@ -1,4 +1,5 @@
 import { Slot } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
 
 import {
   useFonts,
@@ -14,5 +15,14 @@ export default function Layout() {
     Poppins_700Bold,
   });
 
-  return fontsLoaded ? <Slot /> : null;
+  if (!fontsLoaded) {
+    return;
+  }
+
+  return (
+    <>
+      <StatusBar style='dark' />
+      <Slot />
+    </>
+  );
 }

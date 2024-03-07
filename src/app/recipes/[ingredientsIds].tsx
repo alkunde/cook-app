@@ -4,6 +4,7 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import { Ingredients } from '@/components/Ingredients';
+import { Loading } from '@/components/Loading';
 import { Recipe } from '@/components/Recipe';
 
 import { services } from '@/services';
@@ -14,13 +15,15 @@ export default function Recipes() {
   const params = useLocalSearchParams<{ ingredientsIds: string }>();
   const ingredientsIds = params.ingredientsIds.split(',');
 
+  const [isLoading, setIsLoading] = useState(true);
   const [ingredients, setIngredients] = useState<IngredientResponse[]>([]);
   const [recipes, setRecipes] = useState<RecipeResponse[]>([]);
 
   useEffect(() => {
     services.recipes
       .findByIngredientsIds(ingredientsIds)
-      .then(setRecipes);
+      .then(setRecipes)
+      .finally(() => setIsLoading(false));
   }, []);
 
   useEffect(() => {
@@ -28,6 +31,10 @@ export default function Recipes() {
       .findByIds(ingredientsIds)
       .then(setIngredients);
   }, []);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <View style={styles.container}>
